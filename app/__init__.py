@@ -1,17 +1,18 @@
 from flask import Flask
-from config import config
-from flask_sqlalchemy import SQLAlquemy
+from config import Config  # Ahora importamos correctamente la clase Config
+from flask_sqlalchemy import SQLAlchemy
 
+# Inicializar SQLAlchemy
+db = SQLAlchemy()
 
-#inicializar  sqlalchemy
-db = SQLAlquemy()
-
-#crear la aplicacion flask 
+# Crear la aplicación Flask
 app = Flask(__name__)
-app.config.from_obgect(config)
+app.config.from_object(Config)  # Usamos Config correctamente
 
-#ibnicializar sqlalchemy con la aplaicacion 
+# Inicializar SQLAlchemy con la aplicación
 db.init_app(app)
 
-#importar rutas
-from app.controls import ruta1 
+# Importar rutas (asegúrate de que exista el módulo control_user)
+from app.controls import control_user
+
+

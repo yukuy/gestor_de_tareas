@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login</title>
+  <!-- Si ambos archivos están en la misma carpeta, usa: -->
+  <!-- <link rel="stylesheet" href="login.css"> -->
+  <!-- O, si el archivo está en otra carpeta, ajusta la ruta -->
+  <link rel="stylesheet" href="../static/css/login.css">
+
+
+  
+</head>
+<body>
+  <div class="container">
+    <img src="../static/img/login.jpg" alt="login">
+    
+    <h1>Sign In </h1>
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="group1">
+        <label for="correo">Correo</label>
+        <input type="text" name="correo" id="correo" placeholder="Correo">
+      </div>
+      <div class="group1">
+        <label for="clave">Clave</label>
+        <input type="password" name="clave" id="clave" placeholder="Clave">
+      </div>
+      <div class="group1">
+        <button type="submit">Iniciar secion</button>
+      </div>
+    </form>
+  </div>
+
+  <p>NO tienes cuenta <a href="{{ url_for('register') }}">Registrate aquí</a></p>
+</body>
+</html>

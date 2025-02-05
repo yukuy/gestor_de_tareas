@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="app/css/login.css">
+</head>
+<body>
+    <img src="app/static/img/login.jpg" alt="login">
+    <div class="container">
+        <h1>Resgistrarse  para poder ingresar</h1>
+        <form  method="POST" action=" {{ url_for('register') }}">
+            <div class="group1">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre"  id="nombre" placeholder="Nombre">
+            </div>
+            
+            <div class="group1">
+                <label for="correo">Correo</label>
+                <input type="text" name="correo" id="correo" placeholder="Correo">
+            </div>
+            <div class="group1">
+                <label for="clave">Clave</label>
+                <input type="password" name="clave"  id="clave" placeholder="Clave">
+            </div>
+            <div class="group1">
+                <button type="submit">Registrarse</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

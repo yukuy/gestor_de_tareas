@@ -1,10 +1,10 @@
 from app import app, db
-import os 
+from app.models.models import Usuario  # IMPORTANTE: Importa el modelo antes de crear las tablas
 
-#crear tablas en la bd
+# Crear las tablas
 with app.app_context():
-    db.create_all() #crear las tablas al iniciar la aplicacion 
-    print ("tablas creadas con exito")
+    db.create_all()
+    print("✅ Tablas creadas con éxito.")
 
 if __name__ == "__main__":
     app.run(debug=True)
