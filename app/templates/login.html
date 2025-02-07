@@ -9,11 +9,43 @@
   <!-- O, si el archivo está en otra carpeta, ajusta la ruta -->
   <link rel="stylesheet" href="../static/css/login.css">
 
-
-  
 </head>
 <body>
-  <div class="container">
+<!-- Mostrar mensajes -->
+        <div class="mensages">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                  <ul class="flash_messages">  <!-- Agregamos la clase aquí -->
+                      {% for category, message in messages %}
+                          <li class="{{ category }}">{{ message }}</li>
+                      {% endfor %}  
+                  </ul>
+              {% endif %}
+          {% endwith %}
+        </div>
+
+        <style>
+          /* Animación de desvanecimiento */
+          .flash_messages {
+              transition: opacity 0.5s ease-out;
+          }
+        </style>
+
+        <script>
+          setTimeout(function() {
+              var flashMessages = document.querySelector('.flash_messages');  // Selecciona el <ul> con los mensajes
+              if (flashMessages) {
+                  flashMessages.style.opacity = '0';  // Reduce la opacidad a 0 para desvanecerlo
+
+                  setTimeout(function() {
+                      flashMessages.style.display = 'none';  // Oculta completamente después de la animación
+                  }, 500);  // Espera 500ms más para que termine la animación
+              }
+          }, 1000);  // Espera 1 segundo antes de iniciar el desvanecimiento
+        </script>
+
+
+<div class="container">
     <img src="../static/img/login.jpg" alt="login">
     
     <h1>Sign In </h1>
@@ -33,5 +65,8 @@
   </div>
 
   <p>NO tienes cuenta <a href="{{ url_for('register') }}">Registrate aquí</a></p>
+
+      
+
 </body>
 </html>

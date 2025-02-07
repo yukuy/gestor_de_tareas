@@ -5,15 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="../static/css/register.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("clave").addEventListener("input", validarClave);
+        });
+
+        function validarClave() {
+            const clave = document.getElementById("clave").value;
+            const mensaje = document.getElementById("mensajeClave");
+            const boton = document.getElementById("btnRegistro");
+
+            let errores = [];
+
+            console.log("Contraseña ingresada: ", clave);  // Debugging
+
+            if (clave.length < 8) {
+                errores.push("Debe tener al menos 8 caracteres.");
+            }
+            if (!/[A-Z]/.test(clave)) {
+                errores.push("Debe contener al menos una letra mayúscula.");
+            }
+            if (!/[a-z]/.test(clave)) {
+                errores.push("Debe contener al menos una letra minúscula.");
+            }
+            if (!/[0-9]/.test(clave)) {
+                errores.push("Debe contener al menos un número.");
+            }
+            if (!/[!@#$%^&*(),.?\":{}|<>]/.test(clave)) {
+                errores.push("Debe contener al menos un símbolo especial.");
+            }
+
+            console.log("Errores encontrados:", errores);  // Debugging
+
+            if (errores.length > 0) {
+                mensaje.style.color = "red";
+                mensaje.innerHTML = "⚠️ " + errores.join("<br>");
+                boton.disabled = true;
+            } else {
+                mensaje.style.color = "green";
+                mensaje.innerHTML = "✅ Clave segura.";
+                boton.disabled = false;
+            }
+
+            console.log("Estado del botón después:", boton.disabled);
+        }
+    </script>
 </head>
 <body>
+    <!-- Mostrar mensajes -->
+    <div class="mensages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash_messages">  <!-- Agregamos la clase aquí -->
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}  
+                </ul>
+            {% endif %}
+        {% endwith %}
+      </div>
+
+      <style>
+        /* Animación de desvanecimiento */
+        .flash_messages {
+            transition: opacity 0.5s ease-out;
+        }
+      </style>
+
+      <script>
+        setTimeout(function() {
+            var flashMessages = document.querySelector('.flash_messages');  // Selecciona el <ul> con los mensajes
+            if (flashMessages) {
+                flashMessages.style.opacity = '0';  // Reduce la opacidad a 0 para desvanecerlo
+
+                setTimeout(function() {
+                    flashMessages.style.display = 'none';  // Oculta completamente después de la animación
+                }, 500);  // Espera 500ms más para que termine la animación
+            }
+        }, 1000);  // Espera 1 segundo antes de iniciar el desvanecimiento
+      </script>
+
+
     <div class="container">
         <img src="../static/img/registro.png" alt="Registro">
         <h1>SIGN UP</h1>
-        <form  method="POST" action=" {{ url_for('register') }}">
+        <form method="POST" action="{{ url_for('register') }}">
             <div class="group1">
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre"  id="nombre" placeholder="Nombre">
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre">
             </div>
             
             <div class="group1">
@@ -22,12 +101,16 @@
             </div>
             <div class="group1">
                 <label for="clave">Clave</label>
-                <input type="password" name="clave"  id="clave" placeholder="Clave">
+                <input type="password" name="clave" id="clave" placeholder="Clave" required>
+                <small id="mensajeClave"></small><br><br>
             </div>
             <div class="group1">
-                <button type="submit">Registrarse</button>
+                <button type="submit" id="btnRegistro" disabled>Registrarse</button>
             </div>
         </form>
+        <p>¿Ya tienes una cuenta? <a href="{{ url_for('login') }}">Iniciar Sesión</a></p>
     </div>
+           
+    
 </body>
 </html>

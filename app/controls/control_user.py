@@ -4,6 +4,25 @@ from app import app
 from app.models.models import Usuario, db
 from werkzeug.security import generate_password_hash, check_password_hash
 
+def re(q, exp):
+    if re.search(exp, q):
+        return True
+    return False
+
+def es_clave_valided(clave):
+    if len(clave) < 8:
+        return "la Clave debe tener por minimo 8 caracteres."
+    if not any (char.isupper() for char in clave):
+        return "la Clave debe de incluir minusculas."
+    if not any (char.islower()for char in clave):
+        return "la Clave debe de incluir mayusculas."
+    if not any (char.isdigit() for char in clave):
+        return "la clave debe incluir numeros"
+    if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", clave):
+        return "La clave debe incluir al menos un símbolo especial (!@#$%^&*...)."
+    return None
+
+
 #ruta para registrar 
 @app.route("/register", methods=['GET', 'POST'])
 def register():

@@ -111,3 +111,8 @@
       width: 90%;
     }
   }
+
+  .mensages {
+    transition: opacity 0.5s ease; /* Transición suave */
+    opacity: 1;
+  }
