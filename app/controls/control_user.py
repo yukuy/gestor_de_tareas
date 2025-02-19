@@ -65,12 +65,3 @@ def login():
             
     return render_template("login.html")
 
-@app.route("/principal")
-def principal():
-    if 'user_id' not in session:
-        flash('por favor inicia secion primero', 'warning ')
-        return redirect(url_for(login))
-    
-    usuario = Usuario.query.get(session['user_id'])
-    
-    return render_template("principal.html", user_nombre=session['user_nombre'], usuario=usuario)

@@ -14,5 +14,6 @@ db.init_app(app)
 
 # Importar rutas (asegúrate de que exista el módulo control_user)
 from app.controls import control_user
+from app.controls import control_tarea
 
 

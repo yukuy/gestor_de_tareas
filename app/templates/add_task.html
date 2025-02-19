@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Add Task </title>
+    <link rel="stylesheet" href="../static/css/add_task.css">
+
+    <style>
+        
+        .flash_messages {
+            transition: opacity 0.5s ease-out;
+        }
+      </style>
+</head>
+<body>
+    <!-- Mostrar mensajes -->
+    <div class="mensages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash_messages">  <!-- Agregamos la clase aquí -->
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}  
+                </ul>
+            {% endif %}
+        {% endwith %}
+      </div>
+
+      <script>
+        setTimeout(function() {
+            var flashMessages = document.querySelector('.flash_messages');  // Selecciona el <ul> con los mensajes
+            if (flashMessages) {
+                flashMessages.style.opacity = '0';  // Reduce la opacidad a 0 para desvanecerlo
+
+                setTimeout(function() {
+                    flashMessages.style.display = 'none';  // Oculta completamente después de la animación
+                }, 500);  // Espera 500ms más para que termine la animación
+            }
+        }, 1000);  // Espera 1 segundo antes de iniciar el desvanecimiento
+      </script>
+
+      <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+   
+    <div class="container">
+        
+        <div class="grop">
+            <h2>Agegar Tarea</h2>
+            <form method="post" enctype="multipart/form-data" action="{{ url_for('add_task') }}">
+                
+                <div class="group1">
+                    <label for="titulo">Titulo</label>
+                    <input type="text" id="titulo" name="titulo" required><br>
+                </div>
+                <div class="group1">
+                    <label for="descripcion">Descripcion</label>
+                    <textarea name="descripcion" id="descripcion" placeholder="descripcion de la tarea a realiza..."></textarea>
+                </diV>
+                <div class="group1">
+                    <label for="fecha_creacion">Fecha Creacion</label>
+                    <input type="date" name="fecha_creacion" id="fecha_creacion" required>
+                </div>
+                <div class="group1">
+                    <label for="fecha_limite">Fecha limite</label>
+                    <input type="date" name="fecha_limite" id="fecha_limite" required>
+                </div>
+                <div class="group1">
+                    <label for="prioridad">Prioridad</label>
+                    <select name="prioridad" id="prioridad">
+                        <option value="selecione">Seleccione ...</option>
+                        <option value="baja">Baja</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                    </select>
+                </div>
+                
+                <div class="group1">
+                    <button type="submit">Registrar Tarea</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>

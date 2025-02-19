@@ -7,6 +7,24 @@
 </head>
 <body>
 
+    {% block content %}
+        <h2>Listar Tareas</h2>
+
+            {% for task in task %}
+                <p>datos obtenidos : {{ tasks }} </p>
+
+                {% if tasks %}
+                    <ul>
+                        {% for task in tasks %}
+                            <li>{{ task.titulo }} <span>{{ task.estado }}</span> <span>{{ task.prioridad }}</span></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No hay tareas disponibles</p>
+                {% endif %}
+            {% endfor %}
+        
+    {% endblock content %}
     
 </body>
 </html>

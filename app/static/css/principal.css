@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgb(206, 213, 220), rgb(91, 86, 99));
+}
+.sidebar {
+    width: 250px;
+    background: #333;
+    color: white;
+    padding: 20px;
+}
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+.sidebar ul {
+    list-style: none;
+}
+.sidebar ul li {
+    margin: 15px 0;
+}
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.filters select, .filters input {
+    padding: 8px;
+    width: 30%;
+}
+.task-summary {
+    display: flex;
+    justify-content: space-between;
+}
+.task-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    flex: 1;
+    margin: 10px;
+    text-align: center;
+}
+.task-list {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.task-list ul {
+    list-style: none;
+}
+.task-list ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+.add-task {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.add-task input {
+    width: 80%;
+    padding: 8px;
+}
+
+
+.add_task {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.add_task:hover {
+    background-color: #0ee957;
+}
+.editar{
+    text-decoration: none; /* Asegura que no haya subrayado */
+    color: #333; /* Cambia el color del texto */
+    font-weight: bold; /* Mantiene el texto en negrita */
+}
