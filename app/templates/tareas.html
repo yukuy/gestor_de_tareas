@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas</title>
+    <link rel="stylesheet" href="../static/css/tareas.css">
+</head>
+<body>
+    {% extends "principal.html" %}
+    {% block content %}
+    
+        <!-- Contenedor de botones juntos -->
+        <div class="actions">
+            <a class="add_task" href="{{ url_for('add_task') }}">Agregar Tarea</a>
+            <a class="edit_task btn editar" id="edit-link" href="#" style="pointer-events: none; opacity: 0.5;">Editar</a>
+            <a class="delete_task btn eliminar" id="delete-link" href="#" style="pointer-events: none; opacity: 0.5;">Eliminar</a>
+        </div>
+
+        
+        <!-- Listado de las tareas -->
+        <div class="task-container">
+            
+                <!-- Mostrar mensajes -->
+                <div class="messages">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <ul class="flash_messages">
+                                {% for category, message in messages %}
+                                    <li class="{{ category }}">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                    
+            <div class="list">
+                <h2>Listar Tareas</h2><br>
+                <div class="task-list">
+                    {% if tasks %}
+                        <table class="task-table">
+                            <tbody>
+                                {% for task in tasks %}
+                                <tr class="task-item">
+                                    <td>
+                                        <input type="checkbox" class="task-select" data-id="{{ task.id }}">
+                                    </td>
+                                    <td>{{ task.titulo }}</td>
+                                    <td>{{ task.descripcion }}</td>
+                                    <td><span class="status">Estado: {{ task.estado }}</span></td>
+                                    <td><span class="priority">Prioridad: {{ task.prioridad }}</span></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No hay tareas disponibles</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- Script para manejar la activación y redirección de los botones -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const checkboxes = document.querySelectorAll('.task-select');
+                const editLink = document.getElementById('edit-link');
+                const deleteLink = document.getElementById('delete-link');
+        
+                function actualizarLinks() {
+                    const seleccionados = document.querySelectorAll('.task-select:checked');
+                    const seleccionadosCount = seleccionados.length;
+        
+                    // Desactivar botones por defecto
+                    editLink.style.pointerEvents = 'none';
+                    editLink.style.opacity = '0.5';
+                    deleteLink.style.pointerEvents = 'none';
+                    deleteLink.style.opacity = '0.5';
+        
+                    if (seleccionadosCount === 1) {
+                        const taskId = seleccionados[0].getAttribute('data-id');
+                        editLink.href = `{{ url_for('edit_task', id=0) }}`.replace('0', taskId); // Redirección Editar
+                        editLink.style.pointerEvents = 'auto';
+                        editLink.style.opacity = '1';
+                    }
+        
+                    if (seleccionadosCount > 0) {
+                        const ids = [...seleccionados].map(checkbox => checkbox.getAttribute('data-id')).join(',');
+                        deleteLink.href = `{{ url_for('delete_task', ids='0') }}`.replace('0', ids); // Redirección Eliminar
+                        deleteLink.style.pointerEvents = 'auto';
+                        deleteLink.style.opacity = '1';
+                    }
+                }
+        
+                // Asegurar que los botones estén deshabilitados al inicio
+                actualizarLinks();
+        
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', actualizarLinks);
+                });
+            });
+
+            setTimeout(function() {
+                var flashMessages = document.querySelector('.flash_messages');
+                if (flashMessages) {
+                    flashMessages.classList.add('hidden');
+                }
+            }, 1000);
+        </script>
+        
+    {% endblock content %}
+</body>
+</html>

@@ -3,78 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard of task </title>
+    <title>Dashboard of Task</title>
     <link rel="stylesheet" href="../static/css/principal.css">
-    
 </head>
 <body>
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <ul>
+            <li class="new-item">
+                <a class="nav-link" href="{{ url_for('principal') }}">Inicio</a>
+            </li>
+            <li class="new-item">
+                <a class="nav-link" href="{{ url_for('tareas') }}">Tareas</a>
+            </li>
+        </ul>
+    </div>
+
+    {% block content %}
     <div class="main-content">
-                    
-                <!-- Mostrar mensajes -->
-                <div class="mensages">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        <ul class="flash_messages">  <!-- Agregamos la clase aquí -->
-                            {% for category, message in messages %}
-                                <li class="{{ category }}">{{ message }}</li>
-                            {% endfor %}  
-                        </ul>
-                    {% endif %}
-                {% endwith %}
-                </div>
-                <style>
-                /* Animación de desvanecimiento */
-                .flash_messages {
-                    transition: opacity 0.5s ease-out;
-                }
-                </style>
-                <script>
-                setTimeout(function() {
-                    var flashMessages = document.querySelector('.flash_messages');  // Selecciona el <ul> con los mensajes
-                    if (flashMessages) {
-                        flashMessages.style.opacity = '0';  // Reduce la opacidad a 0 para desvanecerlo
+        <!-- Mostrar mensajes -->
+        <div class="messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flash_messages">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
 
-                        setTimeout(function() {
-                            flashMessages.style.display = 'none';  // Oculta completamente después de la animación
-                        }, 500);  // Espera 500ms más para que termine la animación
-                    }
-                }, 1000);  // Espera 1 segundo antes de iniciar el desvanecimiento
-                </script>
-                <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-    
         <div class="top-bar">
-            <h2> Bienvenido {{ usuario.nombre }} </h2>
-
-            <a class="add_task"  href="{{ url_for('add_task') }}">Agregar Tarea</a>
-
-        </div>
-        <div class="task-summary">
-            <div class="task-card">Pendientes: <strong>5</strong></div>
-            <div class="task-card">En Progreso: <strong>3</strong></div>
-            <div class="task-card">Completadas: <strong>10</strong></div>
+            <h2>Bienvenido {{ usuario.nombre }}</h2>
         </div>
 
-<!--listado de las tareas -->
-        <div class="task-list">
-            <h2>Listar Tareas</h2>
-
-            {% if tasks %}
-                <ul>
-                    {% for tasks in tasks %}
-                        <li>
-                            <a class="editar" href="{{ url_for('edit_task', id=tasks.id) }}"> <strong>{{ tasks.titulo }}</strong> </a>
-
-                            <spam> Estado: {{ tasks.estado }}</spam>
-                            <spam> Prioridad: {{ tasks.prioridad }} </spam>
-                        </li>
+       
+            <div class="task-summary">
+                <div class="colum">
+                    <h2>Pendientes</h2>
+                    {% for tarea in pendientes %}
+                        <div class="task">{{ tarea.nombre }}</div>
                     {% endfor %}
-                </ul>
-            {% else %}
-                <p>No hay tareas disponibles</p>
-            {% endif %}
-        </div>
+                </div>
+                <div class="colum">
+                    <h2>Progresos</h2>
+                    {% for tarea in progreso %}
+                        <div class="task">{{ tarea.nombre }}</div>
+                    {% endfor %}
+                </div>
+                <div class="colum">
+                    <h2>Completados</h2>
+                    {% for tarea in completado %}
+                        <div class="task">{{ tarea.nombre }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        
+    </div>
 
-    
+    <style>
+        /* Animación de desvanecimiento */
+        .flash_messages {
+            opacity: 1;
+            transition: opacity 0.5s ease-out, visibility 0.5s linear;
+        }
+        .flash_messages.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+
+    <script>
+        setTimeout(function() {
+            var flashMessages = document.querySelector('.flash_messages');
+            if (flashMessages) {
+                flashMessages.classList.add('hidden');
+            }
+        }, 1000);
+    </script>
+    {% endblock content %}
 </body>
 </html>

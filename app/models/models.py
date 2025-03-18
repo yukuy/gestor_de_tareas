@@ -21,7 +21,7 @@ class Tareas(db.Model):
     fecha_creacion = db.Column(db.Date, default=datetime.utcnow, nullable=False)
     fecha_limite = db.Column(db.Date, nullable=True)
     prioridad = db.Column(db.Enum('baja', 'media', 'alta', name='prioridad_enum'), default='media')
-    estado = db.Column(db.Enum('pendiente', 'progreso', 'completada', name='estado_enum'), default='pendiente')
+    estado = db.Column(db.Enum('pendiente', 'progreso', 'completado', name='estado_enum'), default='pendiente')
 
     # Clave foránea con ondelete="SET NULL"
     responsable_id = db.Column(db.Integer, db.ForeignKey('usuario.id', ondelete="CASCADE"), nullable=False)

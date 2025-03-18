@@ -1,30 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard of task </title>
+    <link rel="stylesheet" href="../static/css/principal.css">
+    
 </head>
 <body>
+    <div class="main-content">
+                    
+                <!-- Mostrar mensajes -->
+                <div class="mensages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul class="flash_messages">  <!-- Agregamos la clase aquí -->
+                            {% for category, message in messages %}
+                                <li class="{{ category }}">{{ message }}</li>
+                            {% endfor %}  
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                </div>
+                <style>
+                /* Animación de desvanecimiento */
+                .flash_messages {
+                    transition: opacity 0.5s ease-out;
+                }
+                </style>
+                <script>
+                setTimeout(function() {
+                    var flashMessages = document.querySelector('.flash_messages');  // Selecciona el <ul> con los mensajes
+                    if (flashMessages) {
+                        flashMessages.style.opacity = '0';  // Reduce la opacidad a 0 para desvanecerlo
 
-    {% block content %}
-        <h2>Listar Tareas</h2>
+                        setTimeout(function() {
+                            flashMessages.style.display = 'none';  // Oculta completamente después de la animación
+                        }, 500);  // Espera 500ms más para que termine la animación
+                    }
+                }, 1000);  // Espera 1 segundo antes de iniciar el desvanecimiento
+                </script>
+                <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 
-            {% for task in task %}
-                <p>datos obtenidos : {{ tasks }} </p>
 
-                {% if tasks %}
-                    <ul>
-                        {% for task in tasks %}
-                            <li>{{ task.titulo }} <span>{{ task.estado }}</span> <span>{{ task.prioridad }}</span></li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No hay tareas disponibles</p>
-                {% endif %}
-            {% endfor %}
-        
-    {% endblock content %}
-    
+
+        <div class"top-bar">
+            <h2>Bienvenido  {{ usuario.nombre }}</h2><br>
+            <br>
+        </div>
+
+        <div class="sidebar">
+            <li class="new-item">
+                <a class="nav-link" href="{{ url_for('principal')}}">Inicio</a>
+            </li>
+            <li class="new-item">
+                <a class="nav-link" href="{{ url_for('tareas')}}">Inicio</a>
+            </li>
+            <li class="new-item">
+                <a class="nav-link" href="{{ url_for('perfil')}}">Inicio</a>
+            </li>
+
+        </div>
+        {% block content %}
+            <div class="task-summary">
+                <div class="task-card">Pendientes: <strong>5</strong></div>
+                <div class="task-card">En Progreso: <strong>3</strong></div>
+                <div class="task-card">Completadas: <strong>10</strong></div>
+            </div>
+        {% endblock content %}
+    </div>
+      
 </body>
 </html>

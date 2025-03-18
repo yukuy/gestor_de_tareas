@@ -3,10 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Task </title>
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/edit_task.css">
 </head>
 <body>
-<h1>hola</h1>
-    
+    <div class="group">
+        <h2> Edit Task </h2>
+        <form method="post"  enctype="multipart/form-data" >
+
+            <div class="group1">
+                <label for="titulo">Title</label>
+                <input type="text" name="titulo" id="tutulo" value="{{ task.titulo}}" required>
+            </div>
+            <div class="group1">
+                <label for="descipcion">Description</label>
+                <textarea name="descripcion" id="descripcion" required >{{ task.descripcion}}</textarea>
+            </div>
+            <div class="group1">
+                <label for="fecha_limite">Deadline</label>
+                <input type="date" name="fecha_limite" id="fecha_limite" value="{{ task.fecha_limite}}"requiered>
+            </div>
+            <div class="group1">
+                <label for="prioridad">Priority</label>
+                <select name="prioridad" id="prioridad">
+                    <option value="baja" {% if task.prioridad == 'baja' %} selected{% endif %}>Low</option>
+                    <option value="media" {% if task.prioridad == 'media' %} selected{% endif %}>Average</option>
+                    <option value="alta" {% if task.prioridad == 'alta' %} selected{% endif %}>High</option>
+                </select>
+            </div>
+            <div class="group1">
+                <label for="estado">State</label>
+                <select name="estado" id="estado">
+                    <option value="pendiente" {% if task.estado == 'pendiente' %} selected{% endif %}>Pending</option>
+                    <option value="progreso" {% if task.estado == 'progreso' %} selected {% endif %}>Progress</option>
+                    <option value="completado" {% if task.estado == 'completado' %} selected {% endif %}>Completed</option>
+                </select>
+            </div>
+
+            <div class="group1">
+                <button type="submit">Update Task</button>
+            </div>
+        </form>
+
+    </div>
 </body>
 </html>

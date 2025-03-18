@@ -1,0 +1,183 @@
+/* Menú de navegación */
+.menu {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor principal */
+.main-container {
+    margin-left: 260px; /* Dejar espacio para el menú */
+    width: calc(100% - 260px);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar contenido */
+    justify-content: center;
+    min-height: 100vh; /* Asegurar que todo esté bien alineado */
+    padding: 20px;
+    position: relative;
+}
+
+/* Botones en la esquina superior derecha */
+.actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+/* Estilos de botones más pequeños */
+.actions a {
+    text-decoration: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    transition: background 0.3s ease, opacity 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    min-width: 80px;
+}
+
+/* Ajustar el contenedor de tareas */
+.task-container {
+    width: 80vw;  /* Ocupar el 80% del ancho de la ventana */
+    height: 75vh; /* Ocupar el 75% de la altura de la ventana */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 2cm auto;  /* Centrado con un margen superior */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Tabla dentro del contenedor */
+.task-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+/* Ajustar el tamaño de las celdas */
+.task-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Ajustar los botones */
+.actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+/* Reducir tamaño de los botones */
+.actions a {
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+/* Mejorar distribución de la lista */
+.task-item input[type="checkbox"]:checked + td {
+    background-color: #d4edda;
+}
+
+
+/* Botón Agregar */
+.add_task {
+    background-color: #28a745;
+}
+
+.add_task:hover {
+    background-color: #218838;
+}
+
+/* Botón Editar */
+.edit_task {
+    background-color: #ffc107;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.edit_task.enabled {
+    opacity: 1;
+    pointer-events: auto;
+    background-color: #e0a800;
+}
+
+/* Botón Eliminar */
+.delete_task {
+    background-color: #dc3545;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.delete_task.enabled {
+    opacity: 1;
+    pointer-events: auto;
+    background-color: #c82333;
+}
+
+/* Mensajes flash */
+.flash_messages {
+    list-style: none;
+    padding: 10px;
+    background: #ffd700;
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Ocultar mensajes después de un tiempo */
+.flash_messages.hidden {
+    display: none;
+}
+
+/* Contenedor de tareas */
+.task-container {
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* Tabla de tareas */
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.task-table th, .task-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.task-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Resaltar filas al seleccionar */
+.task-item input[type="checkbox"]:checked + td {
+    background-color: #d4edda;
+}
