@@ -1,28 +1,78 @@
 /* Menú de navegación */
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #636e72, #2d3436);
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor del menú */
 .menu {
-    background-color: #333;
-    padding: 10px;
-    text-align: center;
     width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
     height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #2c3e50;
+    padding-top: 20px;
+    transition: width 0.3s ease-in-out;
+}
+
+.menu:hover {
+    width: 280px;
+}
+
+/* Título del menú */
+.menu h2 {
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+/* Lista de enlaces */
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    padding: 15px;
+    border-bottom: 1px solid #34495e;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+}
+
+.menu ul li a:hover {
+    background: #1abc9c;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+/* Íconos de menú */
+.menu ul li a i {
+    margin-right: 10px;
+    font-size: 18px;
 }
 
 /* Contenedor principal */
 .main-container {
-    margin-left: 260px; /* Dejar espacio para el menú */
+    margin-left: 260px;
     width: calc(100% - 260px);
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrar contenido */
+    align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Asegurar que todo esté bien alineado */
+    min-height: 100vh;
     padding: 20px;
     position: relative;
 }
@@ -36,7 +86,7 @@
     gap: 5px;
 }
 
-/* Estilos de botones más pequeños */
+/* Estilos de botones */
 .actions a {
     text-decoration: none;
     color: white;
@@ -50,53 +100,37 @@
     min-width: 80px;
 }
 
-/* Ajustar el contenedor de tareas */
+/* Ajuste del contenedor de tareas para moverlo a la derecha */
 .task-container {
-    width: 80vw;  /* Ocupar el 80% del ancho de la ventana */
-    height: 75vh; /* Ocupar el 75% de la altura de la ventana */
+    margin-left: 270px; /* Ajusta este valor si es necesario */
+    width: calc(100% - 280px); /* Asegurar que no se solape con el menú */
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin: 2cm auto;  /* Centrado con un margen superior */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Tabla dentro del contenedor */
+/* Ajustar la tabla dentro del contenedor */
 .task-table {
     width: 100%;
-    height: 100%;
     border-collapse: collapse;
 }
 
-/* Ajustar el tamaño de las celdas */
-.task-table td {
-    padding: 15px;
+.task-table th, .task-table td {
+    padding: 12px;
     border-bottom: 1px solid #ccc;
+    text-align: left;
 }
 
-/* Ajustar los botones */
-.actions {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    gap: 5px;
+.task-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
 }
 
-/* Reducir tamaño de los botones */
-.actions a {
-    padding: 6px 10px;
-    font-size: 12px;
-}
-
-/* Mejorar distribución de la lista */
+/* Resaltar filas al seleccionar */
 .task-item input[type="checkbox"]:checked + td {
     background-color: #d4edda;
 }
-
 
 /* Botón Agregar */
 .add_task {
@@ -133,51 +167,35 @@
     background-color: #c82333;
 }
 
-/* Mensajes flash */
+/* Contenedor de mensajes */
+.messages {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 400px;
+    z-index: 1000;
+}
+
+/* Estilos de mensajes flash */
 .flash_messages {
     list-style: none;
-    padding: 10px;
     background: #ffd700;
     text-align: center;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    padding: 12px 20px;
+    border-radius: 8px;
     font-weight: bold;
     color: #333;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    display: inline-block;
+    margin: 5px 0;
 }
 
-/* Ocultar mensajes después de un tiempo */
+/* Ocultar mensajes con animación */
 .flash_messages.hidden {
-    display: none;
-}
-
-/* Contenedor de tareas */
-.task-container {
-    max-width: 600px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-}
-
-/* Tabla de tareas */
-.task-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.task-table th, .task-table td {
-    padding: 12px;
-    border-bottom: 1px solid #ccc;
-    text-align: left;
-}
-
-.task-table th {
-    background-color: #f8f9fa;
-    font-weight: bold;
-}
-
-/* Resaltar filas al seleccionar */
-.task-item input[type="checkbox"]:checked + td {
-    background-color: #d4edda;
+    opacity: 0;
+    pointer-events: none;
 }

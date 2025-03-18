@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../static/css/principal.css">
 </head>
 <body>
-    <div class="sidebar">
+    <div class="menu">
         <h2>Menú</h2>
         <ul>
             <li class="new-item">
@@ -35,30 +35,33 @@
         </div>
 
         <div class="top-bar">
-            <h2>Bienvenido {{ usuario.nombre }}</h2>
+    <h2>Bienvenido {{ usuario.nombre }}</h2>
+</div>
+        
+
+        <div class="task-summary">
+            <div class="column">
+                <h2>Pendientes ({{ pendientes|length }})</h2>
+                {% for tarea in pendientes %}
+                    <div class="task">{{ tarea.titulo }}</div>
+                {% endfor %}
+            </div>
+            
+            <div class="column">
+                <h2>En Progreso ({{ progreso|length }})</h2>
+                {% for tarea in progreso %}
+                    <div class="task">{{ tarea.titulo }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="column">
+                <h2>Completados ({{ completado|length }})</h2>
+                {% for tarea in completado %}
+                    <div class="task">{{ tarea.titulo }}</div>
+                {% endfor %}
+            </div>
         </div>
 
-       
-            <div class="task-summary">
-                <div class="colum">
-                    <h2>Pendientes</h2>
-                    {% for tarea in pendientes %}
-                        <div class="task">{{ tarea.nombre }}</div>
-                    {% endfor %}
-                </div>
-                <div class="colum">
-                    <h2>Progresos</h2>
-                    {% for tarea in progreso %}
-                        <div class="task">{{ tarea.nombre }}</div>
-                    {% endfor %}
-                </div>
-                <div class="colum">
-                    <h2>Completados</h2>
-                    {% for tarea in completado %}
-                        <div class="task">{{ tarea.nombre }}</div>
-                    {% endfor %}
-                </div>
-            </div>
         
     </div>
 

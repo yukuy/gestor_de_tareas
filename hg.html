@@ -63,9 +63,23 @@
         </div>
         {% block content %}
             <div class="task-summary">
-                <div class="task-card">Pendientes: <strong>5</strong></div>
-                <div class="task-card">En Progreso: <strong>3</strong></div>
-                <div class="task-card">Completadas: <strong>10</strong></div>
+                <div class="colum ">
+                    {% for taks in pendiente %}
+                        <div class="task">{{ task.nombre}}</div>
+                    {% endfor %}
+                </div>
+                
+                <div class="colum">
+                    {% for task in progreso %}
+                        <div class="task">{{ task.nombre }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="colum">
+                    {% for task in completado %}
+                        <div class="task">{{ task.nombre}}</div>
+                    {% endfor %}
+                </div>
             </div>
         {% endblock content %}
     </div>

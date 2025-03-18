@@ -68,7 +68,7 @@ def edit_task(id):
         
         db.session.commit()
         flash("actualizacion realizada")
-        return redirect(url_for('tarea'))
+        return redirect(url_for('tareas'))
     
     return render_template('edit_task.html', task=task)
 
@@ -113,11 +113,12 @@ def principal():
     tarea = Tareas.query.filter_by(responsable_id=usuario.id).all()
     #consultas para el tablero 
     pendientes = Tareas.query.filter_by(estado='pendiente').all()
-    progreso = Tareas.query.filter_by(estado='preogreso').all()
-    completado = Tareas.query.filter_by(estado='completado')
+    progreso = Tareas.query.filter_by(estado='progreso').all()
+    completado = Tareas.query.filter_by(estado='completado').all()
     
     return render_template("principal.html", user_nombre=session['user_nombre'], usuario=usuario, pendientes=pendientes, 
                            progreso=progreso, completado=completado, tarea=tarea)
+
 
 
 
